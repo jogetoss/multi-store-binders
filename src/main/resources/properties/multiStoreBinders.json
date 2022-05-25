@@ -1,0 +1,20 @@
+[
+    {
+        "title" : "@@org.joget.marketplace.MultiStoreBinders.config@@",
+        "properties" : [
+            {
+                "name" : "binders",
+                "label" : "@@org.joget.marketplace.MultiStoreBinders.storeBinder@@",
+                "type" : "elementmultiselect",
+                "options_ajax" : "[CONTEXT_PATH]/web/property/json/getElements?classname=org.joget.apps.form.model.FormStoreBinder&exclude=org.joget.marketplace.MultiStoreBinders",
+                "url" : "[CONTEXT_PATH]/web/property/json[APP_PATH]/getPropertyOptions",
+                "default_property_values_url" : "[CONTEXT_PATH]/web/property/json[APP_PATH]/getDefaultProperties",
+                "required" : "true"
+            },{
+                "name" : "comment",
+                "label" : "@@org.joget.marketplace.MultiStoreBinders.comment@@",
+                "type" : "codeeditor"
+            }
+        ]
+    }
+]
