@@ -1,6 +1,6 @@
 # Description
 
-This repository is meant to serve as a general template for how to set up new repositories in the JogetOSS organization. 
+Store form data to multiple form store binders.
 
 # Getting Help
 
