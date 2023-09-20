@@ -2,6 +2,7 @@ package org.joget.marketplace;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.joget.apps.app.model.AppDefinition;
 import org.joget.apps.app.service.AppPluginUtil;
 import org.joget.apps.app.service.AppUtil;
 import org.joget.apps.form.model.Element;
@@ -11,8 +12,10 @@ import org.joget.apps.form.model.FormRowSet;
 import org.joget.apps.form.model.FormStoreBinder;
 import org.joget.apps.form.model.FormStoreElementBinder;
 import org.joget.apps.form.model.FormStoreMultiRowElementBinder;
+import org.joget.plugin.base.Plugin;
 import org.joget.plugin.base.PluginManager;
 import org.joget.plugin.property.model.PropertyEditable;
+import org.joget.workflow.model.WorkflowAssignment;
 
 public class MultiStoreBinders extends FormBinder implements FormStoreBinder, FormStoreElementBinder, FormStoreMultiRowElementBinder {
     
@@ -23,7 +26,7 @@ public class MultiStoreBinders extends FormBinder implements FormStoreBinder, Fo
     }
 
     public String getVersion() {
-        return "7.0.0";
+        return "7.0.1";
     }
     
     public String getClassName() {
@@ -55,10 +58,11 @@ public class MultiStoreBinders extends FormBinder implements FormStoreBinder, Fo
                         String className = binderMap.get("className").toString();
                         FormStoreBinder p = (FormStoreBinder) pluginManager.getPlugin(className);
                         if (p != null) {
-                            Map properties = new HashMap();
-                            properties.putAll((Map) binderMap.get("properties"));                                       
+                            Map propertiesMap = new HashMap();
+                            propertiesMap.putAll(AppPluginUtil.getDefaultProperties((Plugin) p, (Map) binderMap.get("properties"), (AppDefinition) AppUtil.getCurrentAppDefinition(), null));
+
                             if (p instanceof PropertyEditable) {
-                                ((PropertyEditable) p).setProperties(properties);
+                                ((PropertyEditable) p).setProperties(propertiesMap);
                             }
                             p.store(element, rows, formData);
                         }
